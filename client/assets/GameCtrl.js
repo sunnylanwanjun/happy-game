@@ -28,14 +28,14 @@ cc.Class({
         let AICtrl = require('AICtrl');
         let PlayerCtrl = require('PlayerCtrl');
         let RoleMove = require('RoleMove');
-        // for(let i = 1; i <= 3; i++) {
-        //     let aiNode = cc.instantiate(this.mainRole);
-        //     let aiNode.parent = this.mainRole.node.parent;
-        //     let aiMove = aiNode.getComponent(RoleMove);
-        //     aiMove.init(i);
-        //     aiNode.addComponent(AICtrl);
-        //     aiNode.removeComponent(PlayerCtrl);
-        // }
+        for(let i = 1; i <= 3; i++) {
+            let aiNode = cc.instantiate(this.mainRole);
+            aiNode.parent = this.mainRole.parent;
+            let aiMove = aiNode.getComponent(RoleMove);
+            aiMove.init(i);
+            aiNode.addComponent(AICtrl);
+            aiNode.removeComponent(PlayerCtrl);
+        }
         this.mainRole.getComponent(RoleMove).init(0);
         this.bulletArr01 = [];
         this.bulletArr01.push(this.bullet01);
@@ -65,7 +65,7 @@ cc.Class({
         if (!bullet) {
             let bulletTpl = this.bulletTpl[type];
             bullet = cc.instantiate(bulletTpl);
-            bullet.parent = this.bulletTpl.parent;
+            bullet.parent = bulletTpl.parent;
         }
         let BulletCtrl = require('BulletCtrl');
         bullet.getComponent(BulletCtrl).init(moveSpeed, dis, dir, type, x, y);

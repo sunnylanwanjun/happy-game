@@ -16,14 +16,19 @@ let GameMap = cc.Class({
         goodsArr:{
             type:[cc.Texture2D],
             default:[],
-        }
+        },
+        uiPanel:{
+            type:require('uiPanel'),
+            default:null,
+        },
     },
 
     onLoad () {
         this.map = {};
-        this.checkInterval = 3;
+        this.checkInterval = 0.3;
         this.curTime = 0;
 
+        this.addScore = 5;
         this.commonGoodsType = 4;
         this.maxWidth = 1920;
         this.maxHeight = 1080;
@@ -34,11 +39,12 @@ let GameMap = cc.Class({
 
         this.initGrid();
 
-        this.maxGoodsNum = 50;
+        this.maxGoodsNumMap = {[0]:30, [1]:30, [2]:30, [3]:30, [4]:5};
+        this.scoreMap = {[0]:0, [1]:0, [2]:0, [3]:0};
         this.totalGoodsNumMap = [];
         for (let i = 0; i < this.goodsArr.length; i++) {
             this.totalGoodsNumMap[i] = 0;
-            for (let j = 0; j < this.maxGoodsNum; j++) {
+            for (let j = 0; j < this.maxGoodsNumMap[i]; j++) {
                 this.randomGrid(i);
             }
         }
@@ -127,12 +133,12 @@ let GameMap = cc.Class({
     getGrid (row, col) {
         let rowData = this.map[row];
         if (!rowData) {
-            console.log("getGrid rowData is empty, row is",row);
+            //console.log("getGrid rowData is empty, row is",row);
             return;
         }
         let colData = rowData[col];
         if (!colData) {
-            console.log("getGrid colData is empty, col is",col);
+            //console.log("getGrid colData is empty, col is",col);
             return;
         }
         return colData;
@@ -167,7 +173,7 @@ let GameMap = cc.Class({
         let tempRowCol = this.getRandomRowCol();
         let colData = this.getGrid(tempRowCol.row, tempRowCol.col);
         if (!colData) return;
-        if (this.totalGoodsNumMap[type] >= this.maxGoodsNum) return;
+        if (this.totalGoodsNumMap[type] >= this.maxGoodsNumMap[type]) return;
 
         colData.goodsNumMap[type] = colData.goodsNumMap[type] || 0;
         colData.goodsNumMap[type]++;
@@ -182,6 +188,10 @@ let GameMap = cc.Class({
             type = this.commonGoodsType;
         }
         if (colData.goodsNumMap[type] > 0) {
+            if (this.scoreMap[type] != undefined) {
+                this.scoreMap[type] += this.addScore;
+                this.uiPanel.updateScore(type, this.scoreMap[type]);
+            }
             colData.goodsNumMap[type]--;
             this.totalGoodsNumMap[type]--;
             this.updateGrid(row, col);
@@ -219,7 +229,7 @@ let GameMap = cc.Class({
         if (this.curTime < this.checkInterval) return;
         this.curTime = 0;
         for (let i = 0; i < this.totalGoodsNumMap.length; i++) {
-            let randomNum = this.maxGoodsNum - this.totalGoodsNumMap[i];
+            let randomNum = this.maxGoodsNumMap[i] - this.totalGoodsNumMap[i];
             if (randomNum <= 0) continue;
             for (let j = 0; j < randomNum; j++) {
                 this.randomGrid(i);

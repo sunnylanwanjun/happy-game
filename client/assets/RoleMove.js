@@ -125,22 +125,33 @@ cc.Class({
         if (this.type === undefined) return;
         let x = this.node.x;
         let y = this.node.y;
+        let isToEdge = false;
+        let rowChange = false;
+        let colChange = false;
         switch (this.state) {
             case 'left':
                 this.updateAvatar('left');
+                isToEdge = this.curCol <= 0;
                 x -= this.moveSpeed;
+                rowChange = true;
             break;
             case 'right':
                 this.updateAvatar('right');
+                isToEdge = (this.curCol >= this.map.maxCol - 1);
                 x += this.moveSpeed;
+                rowChange = true;
             break;
             case 'down':
+                isToEdge = (this.curRow <= 0);
                 this.updateAvatar('down');
                 y -= this.moveSpeed;
+                colChange = true;
             break;
             case 'up':
+                isToEdge = (this.curRow >= this.map.maxRow - 1);
                 this.updateAvatar('up');
                 y += this.moveSpeed;
+                colChange = true;
             break;
             case 'stop':
                 this.updateAvatar(this.dir);
@@ -149,8 +160,9 @@ cc.Class({
                 this.updateAvatar(this.dir);
             break;
         }
+
         let tempRowCol = this.map.getGridByPos(x, y);
-        if (!tempRowCol) {
+        if (!tempRowCol || isToEdge) {
             this.state = 'stop';
             this.updateAvatar(this.dir);
             return;
@@ -165,5 +177,13 @@ cc.Class({
         this.curRow = tempRowCol.row;
         this.curCol = tempRowCol.col;
         this.map.arriveGrid(this.curRow, this.curCol, this.type);
-    }
+        if (rowChange) {
+            this.map.arriveGrid(this.curRow + tempRowCol.rowOffset, this.curCol, this.type);
+        }
+        if (colChange) {
+            this.map.arriveGrid(this.curRow, this.curCol + tempRowCol.colOffset, this.type);
+        }
+    },
+
+
 });
