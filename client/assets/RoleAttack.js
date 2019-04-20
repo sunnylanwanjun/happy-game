@@ -17,9 +17,11 @@ cc.Class({
     },
 
     attack () {
-        this.moveComp.move('attack');
-        let dir = this.moveComp.dir;
-        let type = this.moveComp.type;
-        this.gameCtrl.createBullet(this.bulletSpeed, this.bulletDis, dir, type, this.node.x, this.node.y);
+        if (this.moveComp) {
+            this.moveComp.move('attack');
+            let dir = this.moveComp.dir;
+            let type = this.moveComp.type;
+            this.gameCtrl.createBullet(this.bulletSpeed, this.bulletDis, dir, type, this.node.x, this.node.y);
+        }
     },
 });

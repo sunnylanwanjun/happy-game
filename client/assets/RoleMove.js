@@ -12,7 +12,23 @@ cc.Class({
         avatar:{
             default: null,
             type: sp.Skeleton,
-        }
+        },
+        name0:{
+            default: null,
+            type: cc.Node,
+        },
+        name1:{
+            default: null,
+            type: cc.Node,
+        },
+        name2:{
+            default: null,
+            type: cc.Node,
+        },
+        name3:{
+            default: null,
+            type: cc.Node,
+        },
     },
 
     init (type) {
@@ -28,9 +44,21 @@ cc.Class({
         this.node.x = tempPos.x;
         this.node.y = tempPos.y;
         this.map.arriveGrid(this.curRow, this.curCol, this.type);
+        this.nameMap = {
+            [0]:this.name0,
+            [1]:this.name1,
+            [2]:this.name2,
+            [3]:this.name3
+        };
 
         let skinType = type + 1;
         this.avatar.setSkin('skin_0' + skinType);
+
+        cc.ResultInfo[type].skinType = 'skin_0' + skinType;
+        cc.ResultInfo[type].score = 0;
+
+        this.nameNode = this.nameMap[type];
+        this.nameNode.active = true;
         this.avatar.setCompleteListener(function () {
             if (this.state == 'attack') {
                 this.move('stop');
@@ -54,21 +82,25 @@ cc.Class({
                 case 'left':
                     this.dir = dir;
                     this.node.scaleX = -1;
+                    this.nameNode.scaleX = -1;
                     this._setAvatar("standby_S");
                 break;
                 case 'right':
                     this.dir = dir;
                     this.node.scaleX = 1;
+                    this.nameNode.scaleX = 1;
                     this._setAvatar("standby_S");
                 break;
                 case 'down':
                     this.dir = dir;
                     this.node.scaleX = 1;
+                    this.nameNode.scaleX = 1;
                     this._setAvatar("standby_F");
                 break;
                 case 'up':
                     this.dir = dir;
                     this.node.scaleX = 1;
+                    this.nameNode.scaleX = 1;
                     this._setAvatar("standby_B");
                 break;
             }
@@ -77,21 +109,25 @@ cc.Class({
                 case 'left':
                     this.dir = dir;
                     this.node.scaleX = -1;
+                    this.nameNode.scaleX = -1;
                     this._setAvatar("shoot_S");
                 break;
                 case 'right':
                     this.dir = dir;
                     this.node.scaleX = 1;
+                    this.nameNode.scaleX = 1;
                     this._setAvatar("shoot_S");
                 break;
                 case 'down':
                     this.dir = dir;
                     this.node.scaleX = 1;
+                    this.nameNode.scaleX = 1;
                     this._setAvatar("shoot_F");
                 break;
                 case 'up':
                     this.dir = dir;
                     this.node.scaleX = 1;
+                    this.nameNode.scaleX = 1;
                     this._setAvatar("shoot_B");
                 break;
             }
@@ -100,21 +136,25 @@ cc.Class({
                 case 'left':
                     this.dir = dir;
                     this.node.scaleX = -1;
+                    this.nameNode.scaleX = -1;
                     this._setAvatar("move_S");
                 break;
                 case 'right':
                     this.dir = dir;
                     this.node.scaleX = 1;
+                    this.nameNode.scaleX = 1;
                     this._setAvatar("move_S");
                 break;
                 case 'down':
                     this.dir = dir;
                     this.node.scaleX = 1;
+                    this.nameNode.scaleX = 1;
                     this._setAvatar("move_F");
                 break;
                 case 'up':
                     this.dir = dir;
                     this.node.scaleX = 1;
+                    this.nameNode.scaleX = 1;
                     this._setAvatar("move_B");
                 break;
             }
@@ -176,12 +216,12 @@ cc.Class({
         }
         this.curRow = tempRowCol.row;
         this.curCol = tempRowCol.col;
-        this.map.arriveGrid(this.curRow, this.curCol, this.type);
+        this.map.arriveGrid(this.curRow, this.curCol, this.type, this);
         if (rowChange) {
-            this.map.arriveGrid(this.curRow + tempRowCol.rowOffset, this.curCol, this.type);
+            this.map.arriveGrid(this.curRow + tempRowCol.rowOffset, this.curCol, this.type, this);
         }
         if (colChange) {
-            this.map.arriveGrid(this.curRow, this.curCol + tempRowCol.colOffset, this.type);
+            this.map.arriveGrid(this.curRow, this.curCol + tempRowCol.colOffset, this.type, this);
         }
     },
 

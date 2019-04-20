@@ -7,12 +7,10 @@ cc.Class({
         
     },
 
-    onLoad () {
+    start () {
         this.moveComp = this.node.getComponent(RoleMove);
         this.attackComp = this.node.getComponent(RoleAttack);
-    },
 
-    start () {
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown.bind(this));
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp.bind(this));
 

@@ -6,7 +6,12 @@ cc.Class({
     },
 
     start () {
-
+        cc.ResultInfo = [
+            {skinType:0,score:0},
+            {skinType:0,score:0},
+            {skinType:0,score:0},
+            {skinType:0,score:0}
+        ]
     },
 
     toGame () {

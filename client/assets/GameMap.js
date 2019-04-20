@@ -181,7 +181,7 @@ let GameMap = cc.Class({
         this.updateGrid(tempRowCol.row, tempRowCol.col);
     },
 
-    arriveGrid (row, col, type) {
+    arriveGrid (row, col, type, roleMove) {
         let colData = this.getGrid(row, col);
         if (!colData) return;
         if (colData.type === this.commonGoodsType) {
@@ -191,6 +191,10 @@ let GameMap = cc.Class({
             if (this.scoreMap[type] != undefined) {
                 this.scoreMap[type] += this.addScore;
                 this.uiPanel.updateScore(type, this.scoreMap[type]);
+                cc.ResultInfo[type].skinType = 'skin_0' + (type + 1);
+                cc.ResultInfo[type].score = this.scoreMap[type];
+            } else {
+                roleMove.moveSpeed = 20;
             }
             colData.goodsNumMap[type]--;
             this.totalGoodsNumMap[type]--;
