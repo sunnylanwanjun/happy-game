@@ -1,26 +1,25 @@
-let RoleAttack = cc.Class({
+let RoleMove = require('RoleMove');
+let GameCtrl = require('GameCtrl');
+cc.Class({
     extends: cc.Component,
-    name: 'cc.RoleAttack',
 
     properties: {
         gameCtrl:{
             default:null,
-            type:cc.GameCtrl,
+            type:GameCtrl,
         }
     },
 
     start () {
-        this.moveComp = this.node.getComponent(cc.RoleMove);
+        this.moveComp = this.node.getComponent(RoleMove);
         this.bulletSpeed = 20;
         this.bulletDis = 12 * 80;
     },
 
     attack () {
-        this.moveComp.move('stop');
+        this.moveComp.move('attack');
         let dir = this.moveComp.dir;
         let type = this.moveComp.type;
-        this.gamectrl.createBullet(this.bulletSpeed, this.bulletDis, dir, type, this.node.x, this.node.y);
+        this.gameCtrl.createBullet(this.bulletSpeed, this.bulletDis, dir, type, this.node.x, this.node.y);
     },
 });
-
-cc.RoleAttack = module.exports = RoleAttack;

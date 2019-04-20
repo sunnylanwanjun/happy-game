@@ -1,20 +1,19 @@
-let AICtrl = cc.Class({
+let RoleMove = require('RoleMove');
+let RoleAttack = require('RoleAttack');
+cc.Class({
     extends: cc.Component,
-    name : 'cc.AICtrl',
-    
+
     properties: {
         
     },
 
     start () {
-        this.state = ''
-        this.moveComp = this.node.getComponent(cc.RoleMove);
-        this.attackComp = this.node.getComponent(cc.RoleAttack);
+        this.state = '';
+        this.moveComp = this.node.getComponent(RoleMove);
+        this.attackComp = this.node.getComponent(RoleAttack);
     },
 
     update () {
 
     },
 });
-
-cc.AICtrl = module.exports = AICtrl;

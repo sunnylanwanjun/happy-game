@@ -1,15 +1,16 @@
-let BulletCtrl = cc.Class({
+let GameMap = require('GameMap');
+let GameCtrl = require('GameCtrl');
+cc.Class({
     extends: cc.Component,
-    name: 'cc.BulletCtrl',
 
     properties: {
         gameMap: {
             default:null,
-            type:cc.GameMap,
+            type:GameMap,
         },
         gameCtrl:{
             default:null,
-            type:cc.GameCtrl,
+            type:GameCtrl,
         }
     },
 
@@ -43,30 +44,39 @@ let BulletCtrl = cc.Class({
             case 'down':
                 this.node.y -= this.moveSpeed;
                 this.node.scaleX = 1;
-                this.node.rotation = -90;
+                this.node.rotation = 90;
                 colChange = true;
             break;
             case 'up':
                 this.node.y += this.moveSpeed;
                 this.node.scaleX = 1;
-                this.node.rotation = 90;
+                this.node.rotation = -90;
                 colChange = true;
             break;
         }
         this.moveDis += this.moveSpeed;
-        let tempRowCol = this.getGridByPos(this.node.x, this.node.y);
+        let tempRowCol = this.gameMap.getGridByPos(this.node.x, this.node.y);
         if (this.moveDis >= this.dis || !tempRowCol) {
-            this.gameCtrl.destroyBullet(this.node);
+            this.gameCtrl.destroyBullet(this.node, this.type);
             return;
         }
-        this.gameMap.setGrid(tempRowCol.row, tempRowCol.col, this.type);
+        let colData = this.gameMap.getGrid(tempRowCol.row, tempRowCol.col);
+        if (colData && colData.type !== this.type) {
+            this.gameMap.setGrid(tempRowCol.row, tempRowCol.col, this.type);
+        }
         if (rowChange) {
-            this.gameMap.setGrid(tempRowCol.row + tempRowCol.rowOffset, tempRowCol.col, this.type);
+            let tempRow = tempRowCol.row + tempRowCol.rowOffset;
+            colData = this.gameMap.getGrid(tempRow, tempRowCol.col);
+            if (colData && colData.type !== this.type) {
+                this.gameMap.setGrid(tempRow, tempRowCol.col, this.type);
+            }
         }
         if (colChange) {
-            this.gameMap.setGrid(tempRowCol.row, tempRowCol.col + tempRowCol.colOffset, this.type);
+            let tempCol = tempRowCol.col + tempRowCol.colOffset;
+            colData = this.gameMap.getGrid(tempRowCol.row, tempCol);
+            if (colData && colData.type !== this.type) {
+                this.gameMap.setGrid(tempRowCol.row, tempCol, this.type);
+            }
         }
     }
 });
-
-cc.BulletCtrl = module.exports = BulletCtrl;

@@ -1,14 +1,15 @@
-let PlayerCtrl = cc.Class({
+let RoleMove = require('RoleMove');
+let RoleAttack = require('RoleAttack');
+cc.Class({
     extends: cc.Component,
-    name: 'cc.PlayerCtrl',
 
     properties: {
         
     },
 
     onLoad () {
-        this.moveComp = this.node.getComponent(cc.RoleMove);
-        this.attackComp = this.node.getComponent(cc.RoleAttack);
+        this.moveComp = this.node.getComponent(RoleMove);
+        this.attackComp = this.node.getComponent(RoleAttack);
     },
 
     start () {
@@ -19,7 +20,7 @@ let PlayerCtrl = cc.Class({
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp.bind(this));
     },
 
-    onKeyDown () {
+    onKeyDown (event) {
         switch (event.keyCode) {
             case cc.macro.KEY.a:
             case cc.macro.KEY.left:
@@ -43,20 +44,24 @@ let PlayerCtrl = cc.Class({
         }
     },
 
-    onKeyUp () {
+    onKeyUp (event) {
         switch (event.keyCode) {
             case cc.macro.KEY.a:
             case cc.macro.KEY.left:
+                if (this.moveComp.state == 'left') this.moveComp.move('stop');
+            break;
             case cc.macro.KEY.d:
             case cc.macro.KEY.right:
+                if (this.moveComp.state == 'right') this.moveComp.move('stop');
+            break;
             case cc.macro.KEY.w:
             case cc.macro.KEY.up:
+            if (this.moveComp.state == 'up') this.moveComp.move('stop');
+            break;
             case cc.macro.KEY.s:
             case cc.macro.KEY.down:
-                this.moveComp.move('stop');
-                break;
+            if (this.moveComp.state == 'down') this.moveComp.move('stop');
+            break;
         }
     }
 });
-
-cc.PlayerCtrl = module.exports = PlayerCtrl;

@@ -3,7 +3,6 @@ let _tempPos = cc.v2(0, 0);
 
 let GameMap = cc.Class({
     extends: cc.Component,
-    name : 'cc.GameMap',
 
     properties: {
         bgArr:{
@@ -20,20 +19,18 @@ let GameMap = cc.Class({
         }
     },
 
-    start () {
+    onLoad () {
         this.map = {};
         this.checkInterval = 3;
         this.curTime = 0;
 
-        this.commonGoodsType = 5;
+        this.commonGoodsType = 4;
         this.maxWidth = 1920;
         this.maxHeight = 1080;
         this.gridWidth = 80;
         this.gridHeight = 80;
-        this.maxRow = this.maxWidth / this.gridWidth;
-        this.maxCol = this.maxHeight / this.gridHeight;
-        this.node.anchorX = 0;
-        this.node.anchorY = 0;
+        this.maxRow = Math.floor(this.maxHeight / this.gridHeight);
+        this.maxCol = Math.floor(this.maxWidth / this.gridWidth);
 
         this.initGrid();
 
@@ -51,7 +48,6 @@ let GameMap = cc.Class({
         let x = 0, y = 0;
 
         for (let r = 0; r < this.maxRow; r++) {
-            y += this.gridHeight;
             x = 0;
             let rowData = this.map[r] = this.map[r] || {};
             for (let c = 0; c < this.maxCol; c++) {
@@ -64,27 +60,30 @@ let GameMap = cc.Class({
 
                 let bg = new cc.Node();
                 grid.addChild(bg);
-                let bgSp = bg.addComponent(cc.Sprite);
-                bgSp.spriteFrame = new cc.SpriteFrame();
 
                 let line = new cc.Node();
                 grid.addChild(line);
-                let lineSp = line.addComponent(cc.Sprite);
-                lineSp.spriteFrame = new cc.SpriteFrame();
 
                 let good = new cc.Node();
                 grid.addChild(good);
-                let goodSp = good.addComponent(cc.Sprite);
-                goodSp.spriteFrame = new cc.SpriteFrame();
 
                 colData.grid = grid;
-                colData.bgSp = bgSp;
-                colData.lineSp = lineSp;
-                colData.goodSp = goodSp;
+                colData.bg = bg;
+                colData.line = line;
+                colData.good = good;
 
-                this.setGrid(row, col, 0);
+                this.setGrid(r, c, this.commonGoodsType);
             }
+            y += this.gridHeight;
         }
+    },
+
+    _setSpriteFrame (node, texture, rect) {
+        let sp = node.getComponent(cc.Sprite);
+        if (sp) sp.destroy();
+        sp = node.addComponent(cc.Sprite);
+        sp.spriteFrame = new cc.SpriteFrame();
+        sp.spriteFrame.setTexture(texture, rect);
     },
 
     getGridByPos (x, y) {
@@ -147,12 +146,14 @@ let GameMap = cc.Class({
         }
         let x = col * this.gridWidth;
         let y = row * this.gridHeight;
-        let bgSp = colData.bgSp;
-        let lineSp = colData.lineSp;
-        bgSp.spriteFrame.setTexture(this.bgArr[type], cc.rect(x, y, this.gridWidth, this.gridHeight));
-        lineSp.spriteFrame.setTexture(this.lineArr[type]);
-        colData.type = type;
+        let bg = colData.bg;
+        let line = colData.line;
+
+        this._setSpriteFrame(bg, this.bgArr[type], cc.rect(x, y, this.gridWidth, this.gridHeight));
+        this._setSpriteFrame(line, this.lineArr[type]);
+
         colData.goodsNumMap = colData.goodsNumMap || {};
+        colData.type = type;
         this.updateGrid(row, col);
     },
 
@@ -163,14 +164,15 @@ let GameMap = cc.Class({
     },
 
     randomGrid (type) {
-        let tempRowCol = this.getRandom();
+        let tempRowCol = this.getRandomRowCol();
         let colData = this.getGrid(tempRowCol.row, tempRowCol.col);
         if (!colData) return;
+        if (this.totalGoodsNumMap[type] >= this.maxGoodsNum) return;
 
         colData.goodsNumMap[type] = colData.goodsNumMap[type] || 0;
         colData.goodsNumMap[type]++;
         this.totalGoodsNumMap[type]++;
-        this.updateGrid(row, col);
+        this.updateGrid(tempRowCol.row, tempRowCol.col);
     },
 
     arriveGrid (row, col, type) {
@@ -192,9 +194,10 @@ let GameMap = cc.Class({
 
         let curType = colData.type;
         let curTypeNum = colData.goodsNumMap[curType];
-        if (curTypeNum == 0) {
+        if (!curTypeNum) {
             colData.showType = null;
-            colData.goodSp.setVisible(false);
+            let sp = colData.good.getComponent(cc.Sprite);
+            if (sp) sp.destroy();
             return;
         }
 
@@ -203,12 +206,15 @@ let GameMap = cc.Class({
             return;
         }
 
+        if (curType >= this.goodsArr.length) {
+            return;
+        } 
+
         colData.showType = curType;
-        colData.goodSp.setTexture(this.goodsArr[curType]);
-        colData.goodSp.setVisible(true);
+        this._setSpriteFrame(colData.good, this.goodsArr[curType]);
     },
 
-    udpate (dt) {
+    update (dt) {
         this.curTime += dt;
         if (this.curTime < this.checkInterval) return;
         this.curTime = 0;
@@ -221,5 +227,3 @@ let GameMap = cc.Class({
         }
     }
 });
-
-cc.GameMap = module.exports = GameMap;
