@@ -1,5 +1,6 @@
 let RoleAttack = cc.Class({
     extends: cc.Component,
+    name: 'cc.RoleAttack',
 
     properties: {
         gameCtrl:{
@@ -11,15 +12,14 @@ let RoleAttack = cc.Class({
     start () {
         this.moveComp = this.node.getComponent(cc.RoleMove);
         this.bulletSpeed = 20;
-        this.bulletDis = 240;
+        this.bulletDis = 12 * 80;
     },
 
     attack () {
-        console.log("attack");
         this.moveComp.move('stop');
         let dir = this.moveComp.dir;
-        
-        this.gamectrl.createBullet(this.bulletSpeed, this.bulletDis, dir, type, x, y);
+        let type = this.moveComp.type;
+        this.gamectrl.createBullet(this.bulletSpeed, this.bulletDis, dir, type, this.node.x, this.node.y);
     },
 });
 

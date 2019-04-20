@@ -2,6 +2,7 @@ let _dirArr = ['left', 'right', 'down', 'up'];
 
 let RoleMove = cc.Class({
     extends: cc.Component,
+    name: 'cc.RoleMove',
 
     properties: {
         map:{
@@ -55,7 +56,11 @@ let RoleMove = cc.Class({
             break;
         }
         let tempRowCol = this.map.getGridByPos(x, y);
-        if (!tempRowCol) return;
+        if (!tempRowCol) {
+            this.state = 'stop';
+            return;
+        }
+
         this.node.x = x;
         this.node.y = y;
 

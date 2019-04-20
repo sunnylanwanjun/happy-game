@@ -1,5 +1,6 @@
 let GameCtrl = cc.Class({
     extends: cc.Component,
+    name: 'cc.GameCtrl',
 
     properties: {
         mainRole:{

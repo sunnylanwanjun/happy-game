@@ -1,8 +1,9 @@
-let _tempRowCol = {row:0, col:0};
+let _tempRowCol = {row:0, col:0, rowOffset:0, colOffset:0};
 let _tempPos = cc.v2(0, 0);
 
 let GameMap = cc.Class({
     extends: cc.Component,
+    name : 'cc.GameMap',
 
     properties: {
         bgArr:{
@@ -87,10 +88,30 @@ let GameMap = cc.Class({
     },
 
     getGridByPos (x, y) {
-        let col = Math.floor(x / this.gridWidth);
-        let row = Math.floor(y / this.gridHeight);
+        let col0 = x / this.gridWidth;
+        let row0 = y / this.gridHeight;
+
+        let col = Math.floor(col0);
+        let row = Math.floor(row0);
+
         if (col >= this.maxCol) return null;
         if (row >= this.maxRow) return null;
+
+        _tempRowCol.rowOffset = 0;
+        _tempRowCol.colOffset = 0;
+
+        if (row0 - row > 0.5) {
+            _tempRowCol.rowOffset = 1;
+        } else {
+            _tempRowCol.rowOffset = -1;
+        }
+
+        if (col0 - col > 0.5) {
+            _tempRowCol.colOffset = 1;
+        } else {
+            _tempRowCol.colOffset = -1;
+        }
+
         _tempRowCol.row = row;
         _tempRowCol.col = col;
         return _tempRowCol;
@@ -153,9 +174,6 @@ let GameMap = cc.Class({
     },
 
     arriveGrid (row, col, type) {
-        let row = Math.floor(Math.random() * (this.maxRow - 1));
-        let col = Math.floor(Math.random() * (this.maxCol - 1));
-        
         let colData = this.getGrid(row, col);
         if (!colData) return;
         if (colData.type === this.commonGoodsType) {

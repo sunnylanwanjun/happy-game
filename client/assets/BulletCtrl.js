@@ -1,5 +1,6 @@
 let BulletCtrl = cc.Class({
     extends: cc.Component,
+    name: 'cc.BulletCtrl',
 
     properties: {
         gameMap: {
@@ -24,18 +25,32 @@ let BulletCtrl = cc.Class({
 
     update () {
         if (!this.dir) return;
+        let rowChange = false;
+        let colChange = false;
         switch (this.dir) {
             case 'left':
                 this.node.x -= this.moveSpeed;
+                this.node.scaleX = -1;
+                this.node.rotation = 0;
+                rowChange = true;
             break;
             case 'right':
                 this.node.x += this.moveSpeed;
+                this.node.scaleX = 1;
+                this.node.rotation = 0;
+                rowChange = true;
             break;
             case 'down':
                 this.node.y -= this.moveSpeed;
+                this.node.scaleX = 1;
+                this.node.rotation = -90;
+                colChange = true;
             break;
             case 'up':
                 this.node.y += this.moveSpeed;
+                this.node.scaleX = 1;
+                this.node.rotation = 90;
+                colChange = true;
             break;
         }
         this.moveDis += this.moveSpeed;
@@ -45,6 +60,12 @@ let BulletCtrl = cc.Class({
             return;
         }
         this.gameMap.setGrid(tempRowCol.row, tempRowCol.col, this.type);
+        if (rowChange) {
+            this.gameMap.setGrid(tempRowCol.row + tempRowCol.rowOffset, tempRowCol.col, this.type);
+        }
+        if (colChange) {
+            this.gameMap.setGrid(tempRowCol.row, tempRowCol.col + tempRowCol.colOffset, this.type);
+        }
     }
 });
 

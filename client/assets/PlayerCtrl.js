@@ -1,5 +1,6 @@
 let PlayerCtrl = cc.Class({
     extends: cc.Component,
+    name: 'cc.PlayerCtrl',
 
     properties: {
         
