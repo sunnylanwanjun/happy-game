@@ -78,6 +78,7 @@ cc.Class({
             this.preRow = tempRowCol.row;
             this.preCol = tempRowCol.col;
             this.gameMap.setGrid(tempRowCol.row, tempRowCol.col, this.type);
+            this.gameMap.playAttackEff(colData.grid.x, colData.grid.y, this.type);
         }
         if (rowChange) {
             let tempRow = tempRowCol.row + tempRowCol.rowOffset;
@@ -86,6 +87,7 @@ cc.Class({
                 this.preRowChangeRow = tempRow;
                 this.preRowChangeCol = tempRowCol.col;
                 this.gameMap.setGrid(tempRow, tempRowCol.col, this.type);
+                this.gameMap.playAttackEff(colData.grid.x, colData.grid.y, this.type);
             }
         }
         if (colChange) {
@@ -95,6 +97,7 @@ cc.Class({
                 this.preColChangeRow = tempRowCol.row;
                 this.preColChangeCol = tempCol;
                 this.gameMap.setGrid(tempRowCol.row, tempCol, this.type);
+                this.gameMap.playAttackEff(colData.grid.x, colData.grid.y, this.type);
             }
         }
     }

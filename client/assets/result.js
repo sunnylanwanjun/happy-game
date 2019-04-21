@@ -34,10 +34,14 @@ cc.Class({
             default:null,
             type:cc.Label,
         },
+        resultMusic:{
+            default:null,
+            type:cc.AudioClip,
+        }
     },
 
     start () {
-
+        cc.audioEngine.play(this.bgm, false, 1);
         cc.ResultInfo.sort(function (a, b) {
             if (a.score > b.score) {
                 return -1;

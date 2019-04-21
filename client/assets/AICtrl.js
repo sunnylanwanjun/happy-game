@@ -70,7 +70,7 @@ cc.Class({
         } else if (this.state == 'stop') {
             // wait for toStopTime to stop
             this.curTime += dt;
-            this.toChooseTime = 1.5 + Math.random() * 2;
+            this.toChooseTime = 1 + Math.random() * 1;
             if (this.toChooseTime < this.curTime || this.moveComp.state == 'stop') {
                 this.curTime = 0;
                 this.toChooseTime = 0;

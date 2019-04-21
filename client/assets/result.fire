@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.32723178217343496,
-      "y": 0.32723178217343496,
+      "x": 0.38645833333333335,
+      "y": 0.38645833333333335,
       "z": 1
     },
     "_quat": {
@@ -53,7 +53,7 @@
       "w": 1
     },
     "groupIndex": 0,
-    "autoReleaseAssets": false,
+    "autoReleaseAssets": true,
     "_id": "13c40d44-40d3-4f15-bf26-ee4f1cf5985a"
   },
   {
@@ -1955,6 +1955,9 @@
     },
     "score3": {
       "__id__": 30
+    },
+    "resultMusic": {
+      "__uuid__": "ee3eb05c-8f51-486b-9a20-126c597eb0ae"
     },
     "_id": "65x8fNHCRJFrvjZ5SoLCyl"
   }

@@ -25,6 +25,18 @@ let GameMap = cc.Class({
         audioCtrl:{
             default: null,
             type: AudioCtrl,
+        },
+        eatArr:{
+            type: [cc.Node],
+            default: [],
+        },
+        attackArr:{
+            type: [cc.Node],
+            default: [],
+        },
+        effectCon:{
+            type:cc.Node,
+            default:null
         }
     },
 
@@ -32,6 +44,10 @@ let GameMap = cc.Class({
         this.map = {};
         this.checkInterval = 0.3;
         this.curTime = 0;
+
+        this.effectPool = {[0]:[], [1]:[], [2]:[], [3]:[], [4]:[]};
+        this.attackPool = {[0]:[], [1]:[], [2]:[], [3]:[], [4]:[]};
+        this.effectMaxNum = 50;
 
         this.addScore = 5;
         this.commonGoodsType = 4;
@@ -197,6 +213,8 @@ let GameMap = cc.Class({
         if (!colData) return;
         if (colData.type === this.commonGoodsType) {
             type = this.commonGoodsType;
+        } else if (type !== colData.type) {
+            return;
         }
         if (colData.goodsNumMap[type] > 0) {
             if (this.scoreMap[type] != undefined) {
@@ -205,13 +223,54 @@ let GameMap = cc.Class({
                 cc.ResultInfo[type].skinType = 'skin_0' + (type + 1);
                 cc.ResultInfo[type].score = this.scoreMap[type];
             } else {
-                roleMove.moveSpeed = 20;
+                roleMove.moveSpeed += 2;
             }
             colData.goodsNumMap[type]--;
             this.totalGoodsNumMap[type]--;
             this.updateGrid(row, col);
             this.audioCtrl.playEat();
+            this.playEatEff(colData.grid.x, colData.grid.y, type);
         }
+    },
+
+    playEatEff (x, y, type) {
+        let effect = this.effectPool[type].pop();
+        if (!effect) {
+            effect = cc.instantiate(this.eatArr[type]);
+        }
+        effect.active = true;
+        effect.parent = this.effectCon;
+        effect.opacity = 255;
+        effect.x = x;
+        effect.y = y;
+        effect.runAction(cc.sequence(cc.fadeOut(0.3),cc.callFunc(function () {
+            if (this.effectPool[type].length < this.effectMaxNum) {
+                this.effectPool[type].push(effect);
+                effect.active = false;
+            } else {
+                effect.destroy();
+            }
+        },this)));
+    },
+
+    playAttackEff (x, y, type) {
+        let effect = this.attackPool[type].pop();
+        if (!effect) {
+            effect = cc.instantiate(this.attackArr[type]);
+        }
+        effect.active = true;
+        effect.parent = this.effectCon;
+        effect.opacity = 255;
+        effect.x = x;
+        effect.y = y;
+        effect.runAction(cc.sequence(cc.fadeOut(0.2),cc.callFunc(function () {
+            if (this.attackPool[type].length < this.effectMaxNum) {
+                this.attackPool[type].push(effect);
+                effect.active = false;
+            } else {
+                effect.destroy();
+            }
+        },this)));
     },
 
     updateGrid (row, col) {

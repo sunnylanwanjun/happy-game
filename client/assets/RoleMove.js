@@ -43,7 +43,7 @@ cc.Class({
         let tempPos = this.map.getGridPos(this.curRow, this.curCol);
         this.node.x = tempPos.x;
         this.node.y = tempPos.y;
-        this.map.arriveGrid(this.curRow, this.curCol, this.type);
+        this.map.arriveGrid(this.curRow, this.curCol, this.type, this);
         this.nameMap = {
             [0]:this.name0,
             [1]:this.name1,
