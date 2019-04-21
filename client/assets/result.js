@@ -41,7 +41,7 @@ cc.Class({
     },
 
     start () {
-        cc.audioEngine.play(this.bgm, false, 1);
+        cc.audioEngine.play(this.resultMusic, false, 1);
         cc.ResultInfo.sort(function (a, b) {
             if (a.score > b.score) {
                 return -1;
