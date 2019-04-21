@@ -1,5 +1,6 @@
 let RoleMove = require('RoleMove');
 let GameCtrl = require('GameCtrl');
+let AudioCtrl = require('AudioCtrl');
 cc.Class({
     extends: cc.Component,
 
@@ -7,6 +8,10 @@ cc.Class({
         gameCtrl:{
             default:null,
             type:GameCtrl,
+        },
+        audioCtrl:{
+            default:null,
+            type:AudioCtrl,
         }
     },
 
@@ -18,6 +23,7 @@ cc.Class({
 
     attack () {
         if (this.moveComp) {
+            this.audioCtrl.playAttack();
             this.moveComp.move('attack');
             let dir = this.moveComp.dir;
             let type = this.moveComp.type;

@@ -1,3 +1,4 @@
+let AudioCtrl = require('AudioCtrl');
 let _tempRowCol = {row:0, col:0, rowOffset:0, colOffset:0};
 let _tempPos = cc.v2(0, 0);
 
@@ -21,6 +22,10 @@ let GameMap = cc.Class({
             type:require('uiPanel'),
             default:null,
         },
+        audioCtrl:{
+            default: null,
+            type: AudioCtrl,
+        }
     },
 
     onLoad () {
@@ -84,10 +89,16 @@ let GameMap = cc.Class({
         }
     },
 
-    _setSpriteFrame (node, texture, rect) {
+    _setSpriteFrame (node, texture, rect, srcBlendMode, dstBlendMode) {
         let sp = node.getComponent(cc.Sprite);
         if (sp) sp.destroy();
         sp = node.addComponent(cc.Sprite);
+        if (srcBlendMode) {
+            sp.srcBlendFactor = srcBlendMode;
+        }
+        if (dstBlendMode) {
+            sp.dstBlendFactor = dstBlendMode;
+        }
         sp.spriteFrame = new cc.SpriteFrame();
         sp.spriteFrame.setTexture(texture, rect);
     },
@@ -199,6 +210,7 @@ let GameMap = cc.Class({
             colData.goodsNumMap[type]--;
             this.totalGoodsNumMap[type]--;
             this.updateGrid(row, col);
+            this.audioCtrl.playEat();
         }
     },
 
@@ -225,7 +237,7 @@ let GameMap = cc.Class({
         } 
 
         colData.showType = curType;
-        this._setSpriteFrame(colData.good, this.goodsArr[curType]);
+        this._setSpriteFrame(colData.good, this.goodsArr[curType], undefined, undefined, cc.macro.BlendFactor.ONE);
     },
 
     update (dt) {

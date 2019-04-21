@@ -71,10 +71,10 @@
         "__id__": 5
       },
       {
-        "__id__": 40
+        "__id__": 41
       },
       {
-        "__id__": 56
+        "__id__": 57
       },
       {
         "__id__": 8
@@ -84,10 +84,13 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 75
+        "__id__": 76
       },
       {
-        "__id__": 54
+        "__id__": 55
+      },
+      {
+        "__id__": 39
       }
     ],
     "_prefab": null,
@@ -232,7 +235,7 @@
         "__id__": 6
       },
       {
-        "__id__": 39
+        "__id__": 40
       }
     ],
     "_prefab": null,
@@ -341,6 +344,9 @@
     ],
     "uiPanel": {
       "__id__": 7
+    },
+    "audioCtrl": {
+      "__id__": 39
     },
     "_id": "5eGTrowgZOo6hRAyKmqgOe"
   },
@@ -1739,6 +1745,27 @@
     "_id": "c9vmCKT3tN8agNaMqZMDNk"
   },
   {
+    "__type__": "473c5v/abJF4KAd7IhkXXFs",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "bgm": {
+      "__uuid__": "925c165e-80bb-4b6e-9de0-b2a7fa0d8e64"
+    },
+    "attack": {
+      "__uuid__": "6825e994-1947-4bbe-8f57-d9785e978228"
+    },
+    "eat": {
+      "__uuid__": "fa5e1fbc-bd36-4f64-a747-9b2d4282ada0"
+    },
+    "bgmVolumn": 1,
+    "effVolumn": 1,
+    "_id": "b3lCE/zShEt4u867JTDu7m"
+  },
+  {
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
@@ -1774,14 +1801,14 @@
     },
     "_children": [
       {
-        "__id__": 41
+        "__id__": 42
       }
     ],
     "_active": true,
     "_level": 2,
     "_components": [
       {
-        "__id__": 74
+        "__id__": 75
       }
     ],
     "_prefab": null,
@@ -1834,36 +1861,36 @@
     "_name": "role",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 40
+      "__id__": 41
     },
     "_children": [
       {
-        "__id__": 42
+        "__id__": 43
       },
       {
-        "__id__": 44
+        "__id__": 45
       },
       {
-        "__id__": 46
+        "__id__": 47
       },
       {
-        "__id__": 48
+        "__id__": 49
       },
       {
-        "__id__": 50
+        "__id__": 51
       }
     ],
     "_active": true,
     "_level": 3,
     "_components": [
       {
-        "__id__": 52
-      },
-      {
         "__id__": 53
       },
       {
-        "__id__": 73
+        "__id__": 54
+      },
+      {
+        "__id__": 74
       }
     ],
     "_prefab": null,
@@ -1916,14 +1943,14 @@
     "_name": "spine",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 42
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 43
+        "__id__": 44
       }
     ],
     "_prefab": null,
@@ -1976,7 +2003,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 42
+      "__id__": 43
     },
     "_enabled": true,
     "paused": false,
@@ -2012,14 +2039,14 @@
     "_name": "name0",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 42
     },
     "_children": [],
     "_active": false,
     "_level": 4,
     "_components": [
       {
-        "__id__": 45
+        "__id__": 46
       }
     ],
     "_prefab": null,
@@ -2072,7 +2099,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 44
+      "__id__": 45
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -2100,14 +2127,14 @@
     "_name": "name1",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 42
     },
     "_children": [],
     "_active": false,
     "_level": 4,
     "_components": [
       {
-        "__id__": 47
+        "__id__": 48
       }
     ],
     "_prefab": null,
@@ -2160,7 +2187,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 46
+      "__id__": 47
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -2188,14 +2215,14 @@
     "_name": "name2",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 42
     },
     "_children": [],
     "_active": false,
     "_level": 4,
     "_components": [
       {
-        "__id__": 49
+        "__id__": 50
       }
     ],
     "_prefab": null,
@@ -2248,7 +2275,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 48
+      "__id__": 49
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -2276,14 +2303,14 @@
     "_name": "name3",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 41
+      "__id__": 42
     },
     "_children": [],
     "_active": false,
     "_level": 4,
     "_components": [
       {
-        "__id__": 51
+        "__id__": 52
       }
     ],
     "_prefab": null,
@@ -2336,7 +2363,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 50
+      "__id__": 51
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -2364,26 +2391,26 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 41
+      "__id__": 42
     },
     "_enabled": true,
     "map": {
       "__id__": 6
     },
     "avatar": {
-      "__id__": 43
-    },
-    "name0": {
       "__id__": 44
     },
+    "name0": {
+      "__id__": 45
+    },
     "name1": {
-      "__id__": 46
+      "__id__": 47
     },
     "name2": {
-      "__id__": 48
+      "__id__": 49
     },
     "name3": {
-      "__id__": 50
+      "__id__": 51
     },
     "_id": "d8mgMY+9xHLYENAf+OFLjT"
   },
@@ -2392,11 +2419,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 41
+      "__id__": 42
     },
     "_enabled": true,
     "gameCtrl": {
-      "__id__": 54
+      "__id__": 55
+    },
+    "audioCtrl": {
+      "__id__": 39
     },
     "_id": "45h73zH3pJjosAy/RZfKLe"
   },
@@ -2409,19 +2439,19 @@
     },
     "_enabled": true,
     "mainRole": {
-      "__id__": 41
+      "__id__": 42
     },
     "bullet01": {
-      "__id__": 55
+      "__id__": 56
     },
     "bullet02": {
-      "__id__": 57
+      "__id__": 58
     },
     "bullet03": {
-      "__id__": 61
+      "__id__": 62
     },
     "bullet04": {
-      "__id__": 65
+      "__id__": 66
     },
     "_id": "f6zq1K6bpIJYi9pakUaPtp"
   },
@@ -2430,18 +2460,18 @@
     "_name": "bullet01",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 56
+      "__id__": 57
     },
     "_children": [
       {
-        "__id__": 70
+        "__id__": 71
       }
     ],
     "_active": false,
     "_level": 3,
     "_components": [
       {
-        "__id__": 72
+        "__id__": 73
       }
     ],
     "_prefab": null,
@@ -2498,23 +2528,23 @@
     },
     "_children": [
       {
-        "__id__": 55
+        "__id__": 56
       },
       {
-        "__id__": 57
+        "__id__": 58
       },
       {
-        "__id__": 61
+        "__id__": 62
       },
       {
-        "__id__": 65
+        "__id__": 66
       }
     ],
     "_active": true,
     "_level": 2,
     "_components": [
       {
-        "__id__": 69
+        "__id__": 70
       }
     ],
     "_prefab": null,
@@ -2567,18 +2597,18 @@
     "_name": "bullet02",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 56
+      "__id__": 57
     },
     "_children": [
       {
-        "__id__": 58
+        "__id__": 59
       }
     ],
     "_active": false,
     "_level": 3,
     "_components": [
       {
-        "__id__": 60
+        "__id__": 61
       }
     ],
     "_prefab": null,
@@ -2631,14 +2661,14 @@
     "_name": "spine",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 57
+      "__id__": 58
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 59
+        "__id__": 60
       }
     ],
     "_prefab": null,
@@ -2691,7 +2721,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 58
+      "__id__": 59
     },
     "_enabled": true,
     "paused": false,
@@ -2737,14 +2767,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 57
+      "__id__": 58
     },
     "_enabled": true,
     "gameMap": {
       "__id__": 6
     },
     "gameCtrl": {
-      "__id__": 54
+      "__id__": 55
     },
     "_id": "aaylHL6XRJXLDKe7XpmpyY"
   },
@@ -2753,18 +2783,18 @@
     "_name": "bullet03",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 56
+      "__id__": 57
     },
     "_children": [
       {
-        "__id__": 62
+        "__id__": 63
       }
     ],
     "_active": false,
     "_level": 3,
     "_components": [
       {
-        "__id__": 64
+        "__id__": 65
       }
     ],
     "_prefab": null,
@@ -2817,14 +2847,14 @@
     "_name": "spine",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 61
+      "__id__": 62
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 63
+        "__id__": 64
       }
     ],
     "_prefab": null,
@@ -2877,7 +2907,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 62
+      "__id__": 63
     },
     "_enabled": true,
     "paused": false,
@@ -2923,14 +2953,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 61
+      "__id__": 62
     },
     "_enabled": true,
     "gameMap": {
       "__id__": 6
     },
     "gameCtrl": {
-      "__id__": 54
+      "__id__": 55
     },
     "_id": "44e8cjys1J1541aeOa2QJa"
   },
@@ -2939,18 +2969,18 @@
     "_name": "bullet04",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 56
+      "__id__": 57
     },
     "_children": [
       {
-        "__id__": 66
+        "__id__": 67
       }
     ],
     "_active": false,
     "_level": 3,
     "_components": [
       {
-        "__id__": 68
+        "__id__": 69
       }
     ],
     "_prefab": null,
@@ -3003,14 +3033,14 @@
     "_name": "spine",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 65
+      "__id__": 66
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 67
+        "__id__": 68
       }
     ],
     "_prefab": null,
@@ -3063,7 +3093,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 66
+      "__id__": 67
     },
     "_enabled": true,
     "paused": false,
@@ -3109,14 +3139,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 65
+      "__id__": 66
     },
     "_enabled": true,
     "gameMap": {
       "__id__": 6
     },
     "gameCtrl": {
-      "__id__": 54
+      "__id__": 55
     },
     "_id": "9fT6BUcTNBopxaUspaxUJ5"
   },
@@ -3125,7 +3155,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 56
+      "__id__": 57
     },
     "_enabled": true,
     "alignMode": 1,
@@ -3152,14 +3182,14 @@
     "_name": "spine",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 55
+      "__id__": 56
     },
     "_children": [],
     "_active": true,
     "_level": 4,
     "_components": [
       {
-        "__id__": 71
+        "__id__": 72
       }
     ],
     "_prefab": null,
@@ -3212,7 +3242,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 70
+      "__id__": 71
     },
     "_enabled": true,
     "paused": false,
@@ -3258,14 +3288,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 55
+      "__id__": 56
     },
     "_enabled": true,
     "gameMap": {
       "__id__": 6
     },
     "gameCtrl": {
-      "__id__": 54
+      "__id__": 55
     },
     "_id": "9eapGecY9N/4RaDhjDfUGl"
   },
@@ -3274,7 +3304,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 41
+      "__id__": 42
     },
     "_enabled": true,
     "_id": "0dym250L1INp9TNmfWx9gH"
@@ -3284,7 +3314,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 40
+      "__id__": 41
     },
     "_enabled": true,
     "alignMode": 1,
