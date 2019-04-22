@@ -20,10 +20,18 @@ cc.Class({
 
     onLoad () {
         this.playBGM();
+        this.bgmID = null;
+    },
+
+    onDestroy () {
+        if (this.bgmID) {
+            cc.audioEngine.stop(this.bgmID);
+            this.bgmID = null;
+        }
     },
 
     playBGM () {
-        cc.audioEngine.play(this.bgm, true, this.bgmVolumn);
+        this.bgmID = cc.audioEngine.play(this.bgm, true, this.bgmVolumn);
     },
 
     playAttack () {

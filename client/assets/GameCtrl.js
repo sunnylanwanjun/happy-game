@@ -28,7 +28,9 @@ cc.Class({
         let AICtrl = require('AICtrl');
         let PlayerCtrl = require('PlayerCtrl');
         let RoleMove = require('RoleMove');
-        for(let i = 1; i <= 3; i++) {
+        let PlayerCtrl2 = require('PlayerCtrl2');
+
+        for(let i = 2; i <= 3; i++) {
             let aiNode = cc.instantiate(this.mainRole);
             aiNode.parent = this.mainRole.parent;
             let aiMove = aiNode.getComponent(RoleMove);
@@ -36,7 +38,16 @@ cc.Class({
             aiNode.addComponent(AICtrl);
             aiNode.removeComponent(PlayerCtrl);
         }
+        
+        let mainRole2 = cc.instantiate(this.mainRole);
+        mainRole2.parent = this.mainRole.parent;
+        let mainRole2Move = mainRole2.getComponent(RoleMove);
+        mainRole2Move.init(1);
+        mainRole2.addComponent(PlayerCtrl2);
+        mainRole2.removeComponent(PlayerCtrl);
+
         this.mainRole.getComponent(RoleMove).init(0);
+
         this.bulletArr01 = [];
         this.bulletArr01.push(this.bullet01);
         this.bulletArr02 = [];

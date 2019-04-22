@@ -21,7 +21,7 @@ cc.Class({
         leftTime:{
             default:null,
             type:cc.Label,
-        }      
+        },
     },
 
     start () {
